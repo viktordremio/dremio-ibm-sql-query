@@ -37,12 +37,6 @@
             <version>${dremio.version}</version>
         </dependency>
 
-        <!--<dependency>
-            <groupId>com.dremio.community.plugins</groupId>
-            <artifactId>dremio-ce-jdbc-fetcher-api</artifactId>
-            <version>${dremio.version}</version>
-        </dependency>-->
-
         <dependency>
             <groupId>com.dremio.distribution</groupId>
             <artifactId>dremio-jdbc-driver</artifactId>

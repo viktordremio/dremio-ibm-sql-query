@@ -40,7 +40,7 @@ public class IBMSQLConf extends AbstractArpConf<IBMSQLConf> {
 
     private static final String ARP_FILENAME = "arp/implementation/IBMSQL-arp.yaml";
     private static final ArpDialect ARP_DIALECT =
-            AbstractArpConf.loadArpFile(ARP_FILENAME, (IBMSQLDialect::new));
+            AbstractArpConf.loadArpFile(ARP_FILENAME, (ArpDialect::new));
     private static final String DRIVER = "com.ibm.cloud.sql.jdbc.Driver";
     private static Logger logger = Logger.getLogger(IBMSQLConf.class);
 
@@ -52,22 +52,6 @@ public class IBMSQLConf extends AbstractArpConf<IBMSQLConf> {
 
         protected boolean usePrepareForColumnMetadata() {
             return true;
-        }
-    }
-
-    static class IBMSQLDialect extends ArpDialect {
-
-        public IBMSQLDialect(ArpYaml yaml) {
-            super(yaml);
-        }
-
-        @Override
-        public JdbcSchemaFetcherImpl newSchemaFetcher(JdbcPluginConfig config) {
-            return new IBMSQLSchemaFetcher(config);
-        }
-
-        public boolean supportsNestedAggregations() {
-            return false;
         }
     }
 
