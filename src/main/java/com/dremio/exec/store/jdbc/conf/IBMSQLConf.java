@@ -44,14 +44,20 @@ public class IBMSQLConf extends AbstractArpConf<IBMSQLConf> {
     @Tag(1)
     @DisplayMetadata(label = "JDBC URL (Ex: jdbc:ibmcloudsql:{instance-crn}[?{key1}={value1}&{key2}={value2}...]")
     public String jdbcURL;
+
+
     @Tag(2)
     @Secret
     @DisplayMetadata(label = "Password")
     public String password;
+
+
     @Tag(3)
     @NotMetadataImpacting
     @DisplayMetadata(label = "Grant External Query access (External Query allows creation of VDS from a Snowflake query. Learn more here: https://docs.dremio.com/data-sources/external-queries.html#enabling-external-queries)")
     public boolean enableExternalQuery = false;
+
+
     @Tag(4)
     @DisplayMetadata(label = "Record fetch size")
     @NotMetadataImpacting
@@ -62,9 +68,13 @@ public class IBMSQLConf extends AbstractArpConf<IBMSQLConf> {
         return jdbcURL;
     }
 
+
     @Tag(5)
     @DisplayMetadata(label = "Encrypt connection")
     public boolean useSsl = false;
+
+    public IBMSQLConf(){}
+
 
     @Override
     @VisibleForTesting
@@ -79,16 +89,20 @@ public class IBMSQLConf extends AbstractArpConf<IBMSQLConf> {
                 .withAllowExternalQuery(enableExternalQuery)
                 .build();
     }
+
+    
     private CloseableDataSource newDataSource() {
     final Properties properties = new Properties();
 
-    if (useSsl) {
-      properties.setProperty("SSL", "1");
-    }
+        if (useSsl) {
+        properties.setProperty("SSL", "1");
+        }
+
         return DataSources.newGenericConnectionPoolDataSource(DRIVER,
                 toJdbcConnectionString(), null, password, properties,
                 DataSources.CommitMode.DRIVER_SPECIFIED_COMMIT_MODE);
     }
+    
     @Override
     public ArpDialect getDialect() {
         return ARP_DIALECT;
